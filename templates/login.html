@@ -1,0 +1,314 @@
+<html><head><base href="." />
+<meta charset="UTF-8" />
+<title>EcoWorld - Login/Signup</title>
+<style>
+  :root {
+    --primary: #2ecc71;
+    --secondary: #27ae60;
+    --dark: #145a32;
+    --light: #e8f5e9;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  body {
+    background: var(--light);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  header {
+    background: var(--dark);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .auth-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--light);
+  }
+
+  .tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .tab.active {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--dark);
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: var(--secondary);
+  }
+
+  .error-message {
+    color: #e74c3c;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .success-message {
+    color: var(--primary);
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .role-select {
+    margin-bottom: 20px;
+  }
+
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>🌍 EcoWorld</h1>
+    <p>Recycling Rewards Program</p>
+  </header>
+
+  <div class="container">
+    <div class="auth-container">
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('login')">Login</div>
+        <div class="tab" onclick="switchTab('signup')">Sign Up</div>
+      </div>
+
+      <div id="loginForm">
+        <div class="role-select">
+          <label for="loginRole">Login as:</label>
+          <select id="loginRole">
+            <option value="user">User</option>
+            <option value="admin">Company</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required>
+        </div>
+        <button onclick="login()">Login</button>
+      </div>
+
+      <div id="signupForm" style="display: none;">
+        <div class="role-select">
+          <label for="signupRole">Register as:</label>
+          <select id="signupRole">
+            <option value="user">User</option>
+            <option value="admin">company</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="signupName">Name</label>
+          <input type="text" id="signupName" required>
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" required>
+        </div>
+        <button onclick="signup()">Sign Up</button>
+      </div>
+
+      <div id="message"></div>
+    </div>
+  </div>
+
+<script>
+function switchTab(tab) {
+  const loginForm = document.getElementById('loginForm');
+  const signupForm = document.getElementById('signupForm');
+  const tabs = document.querySelectorAll('.tab');
+
+  if (tab === 'login') {
+    loginForm.style.display = 'block';
+    signupForm.style.display = 'none';
+    tabs[0].classList.add('active');
+    tabs[1].classList.remove('active');
+  } else {
+    loginForm.style.display = 'none';
+    signupForm.style.display = 'block';
+    tabs[0].classList.remove('active');
+    tabs[1].classList.add('active');
+  }
+}
+
+function showMessage(message, isError = false) {
+  const messageDiv = document.getElementById('message');
+  messageDiv.textContent = message;
+  messageDiv.className = isError ? 'error-message' : 'success-message';
+}
+
+function login() {
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  const role = document.getElementById('loginRole').value;
+
+  if (!email || !password) {
+    showMessage('Please fill in all fields', true);
+    return;
+  }
+
+  // Get users from localStorage
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(u => u.email === email && u.password === password && u.role === role);
+
+  if (user) {
+    // Store logged in user
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    
+    // Redirect based on role
+    if (role === 'admin') {
+      window.location.href = 'admin.html';
+    } else {
+      window.location.href = 'dashboard.html';
+    }
+  } else {
+    showMessage('Invalid credentials or role', true);
+  }
+}
+
+function signup() {
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+  const confirmPass = document.getElementById('confirmPassword').value;
+  const role = document.getElementById('signupRole').value;
+
+  if (!name || !email || !password || !confirmPass) {
+    showMessage('Please fill in all fields', true);
+    return;
+  }
+
+  if (password !== confirmPass) {
+    showMessage('Passwords do not match', true);
+    return;
+  }
+
+  // Get existing users
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+
+  // Check if email already exists
+  if (users.some(user => user.email === email)) {
+    showMessage('Email already registered', true);
+    return;
+  }
+
+  // Create new user
+  const newUser = {
+    id: Date.now().toString(),
+    name,
+    email,
+    password,
+    role,
+    dateJoined: new Date().toISOString()
+  };
+
+  // Add to users array
+  users.push(newUser);
+  localStorage.setItem('users', JSON.stringify(users));
+
+  showMessage('Registration successful! Please login.');
+  setTimeout(() => switchTab('login'), 1500);
+}
+
+// Initialize admin account if it doesn't exist
+function initializeAdmin() {
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const adminExists = users.some(user => user.role === 'admin');
+
+  if (!adminExists) {
+    const adminUser = {
+      id: 'admin1',
+      name: 'Admin',
+      email: 'admin@ecoworld.com',
+      password: 'admin123',
+      role: 'admin',
+      dateJoined: new Date().toISOString()
+    };
+    users.push(adminUser);
+    localStorage.setItem('users', JSON.stringify(users));
+  }
+}
+
+// Call on page load
+initializeAdmin();
+</script>
+</body>
+</html>
