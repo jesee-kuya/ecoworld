@@ -1,0 +1,277 @@
+<html><head><base href="." />
+<meta charset="UTF-8" />
+<title>EcoWorld - Welcome</title>
+<style>
+  :root {
+    --primary: #2ecc71;
+    --secondary: #27ae60;
+    --dark: #145a32;
+    --light: #e8f5e9;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  body {
+    background: white;
+    overflow-x: hidden;
+  }
+
+  nav {
+    background: var(--dark);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+
+  .logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+  }
+
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    background: linear-gradient(rgba(20, 90, 50, 0.9), rgba(20, 90, 50, 0.9)),
+                url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3');
+    background-size: cover;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .cta-button:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+  }
+
+  .features {
+    padding: 5rem 10%;
+    background: var(--light);
+  }
+
+  .features h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--dark);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+  }
+
+  .feature-card h3 {
+    margin-bottom: 1rem;
+    color: var(--dark);
+  }
+
+  .feature-card p {
+    color: #666;
+    line-height: 1.6;
+  }
+
+  .stats {
+    padding: 5rem 10%;
+    background: white;
+    text-align: center;
+  }
+
+  .stats h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--dark);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .stat-card {
+    padding: 2rem;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  footer {
+    background: var(--dark);
+    color: white;
+    padding: 3rem 10%;
+    text-align: center;
+  }
+
+  footer p {
+    margin-bottom: 1rem;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .social-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+  }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      🌍 EcoWorld
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#stats">Impact</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Transform Recycling into Rewards</h1>
+      <p>Join EcoWorld's innovative recycling rewards program. Turn your eco-friendly actions into points and rewards while helping create a sustainable future for our planet.</p>
+      <a href="index.html" class="cta-button">Get Started</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <h2>Why Choose EcoWorld?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">♻️</div>
+        <h3>Earn Points</h3>
+        <p>Get rewarded for every kilogram of waste you recycle with our points system.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎁</div>
+        <h3>Redeem Rewards</h3>
+        <p>Convert your points into exciting rewards and discounts from our partners.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Track Progress</h3>
+        <p>Monitor your recycling impact and points accumulation in real-time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌱</div>
+        <h3>Save the Planet</h3>
+        <p>Contribute to environmental conservation while being rewarded for your efforts.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" id="stats">
+    <h2>Our Impact</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Active Users</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100T</div>
+        <div class="stat-label">Waste Recycled</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">1M+</div>
+        <div class="stat-label">Points Awarded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5K+</div>
+        <div class="stat-label">Rewards Claimed</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2023 EcoWorld. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://facebook.com">📘</a>
+      <a href="https://twitter.com">🐦</a>
+      <a href="https://instagram.com">📸</a>
+    </div>
+  </footer>
+</body>
+</html>
